@@ -1,0 +1,20 @@
+﻿eager loading qaysidir shart asosida ma`lumotlarni olish jarayonini qaysidir shart bajarilgandan keyin olsa bo`ladigan 
+holatlarda ishlatilinadi. Bunda ma`lumotlar bazasidagi barcha malumotni bitta zaprosga qo`shib berish imkoniyati mavjud.
+Bu orqali ortiqcha narsa haqida o`ylamasdan ma`lumotlar ustida koplab amallarni bajarish imkonini beradi. Ammo bu holat 
+ba`zan ko`p vaqtni olgani uchun ba`zi holatlarda bundan foydalanish maslaxat berilmaydi. Ortiqcha malumotni olib kelib ishlatmasdan
+qaytarilib yuboriladi
+
+var users = db.Users
+    .Include(u => u.BlogUsers)
+        .ThenInclude(u => u.Blog)
+            .ThenInclude(u => u.Posts)
+                .ThenInclude(u => u.Comments)
+                    .ToList();
+
+foreach (var user in users)
+{
+    foreach (var blogUser in user.BlogUsers)
+    {
+        Console.WriteLine($"username : {user.Name}, BlogId: {blogUser.BlogId}, blog name: {blogUser.Blog.Title}");
+    }
+}

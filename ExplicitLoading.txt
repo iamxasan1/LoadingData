@@ -1,0 +1,14 @@
+﻿Bu ham huddi lazy loadingga oxshaydi lekin bunda biz qaysi ma`lumotlar kelishini boshqarishimiz mumkin
+
+ db.Entry(user).Collection(u => u.BlogUsers).Load();
+
+ masalan yuqoridagi kod orqali userni malumotlariga blogUser ni malumotlarini qo`shib ishlatishimiz mumkin.
+
+  db.Entry(blogUser).Reference(q => q.Blog).Load();
+
+yuqoridagi kodda ham 1 chisida qilingandek amal bajarilyapti. ammo birinchi kodda biz blogUser list ni chaqirgandik shu sababdan
+Collection kalit so`zini ishlatgandik 2 chi kodimizda bo`lsa property ni chaqirdik shu sababdan Reference kalit so`zini ishlatdik.
+
+
+explicit loading, eager loading lazay loadinglar barchasi ishi bir biriga halaqit bermaydi . shu sababdan ularni o`rniga qarab birga optimal 
+variantlarni tanlab ishlatsak yaratilajak dasturimiz tezroq ishlaydi
